@@ -15,7 +15,8 @@ import {
   Typography,
   Paper,
   Box,
-  Avatar
+  Avatar,
+  Grid
 } from '@material-ui/core';
 
 import Web3 from "web3";
@@ -28,7 +29,8 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 const useStyles = makeStyles((theme) => ({
   root: {
     minHeight: '100vh',
-    backgroundImage: `url(https://images.unsplash.com/photo-1625120742520-3f085b6894ba?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80)`,
+    minWidth: '100vw',
+    backgroundImage: `url(https://i.ibb.co/T4rnYqJ/colorful-vector-hand-drawn-doodle-2372240.jpg)`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     display: 'flex',
@@ -46,6 +48,38 @@ const useStyles = makeStyles((theme) => ({
   box: {
     justifyContent: 'space-between',
     alignItems: 'center'
+  },
+  ul: {
+    padding: 0
+  },
+  li: {
+    display: 'inline-block',
+    listStyleType: 'none',
+    alignItems: 'center',
+    margin: '0 20px',
+    // &:nth-child(1) button {
+    //   background: #16acea;
+    // }
+    // &:nth-child(2) button {
+    //   background: #d71b3b;
+    // }
+    // &:nth-child(3) button {
+    //   background: #e8d71e;
+    // }
+  },
+  button: {
+    position: 'relative',
+    background: 'rebeccapurple',
+    width: '300px',
+    height: '300px',
+    borderRadius: '50%',
+    border: '10px solid black',
+    color: 'white',
+    fontFamily: 'Verdana',
+    fontWeight: 'bold',
+    fontSize: '50px',
+    cursor: 'pointer',
+    padding: 0,
   }
 }));
 
@@ -136,42 +170,63 @@ function App() {
 
       const contract = new web3.eth.Contract(abi, address);
       console.log("Contract", contract);
-      await contract.methods.mint().send();
+      await contract.methods.mint(1).send({from: accInfo, value: 0.02 * Math.pow(10,18)});
     })
   }
 
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <div>
-        <Paper className={classes.paper}>
-          <Typography variant='h3'>
-            Welcome
-          </Typography>
-          {
-            loggedIn &&
-            <>
-            <Avatar />
-            <Typography variant='h5'>
-              {accInfo.slice(0,10)}...
-            </Typography>
-            </>
-          }
-          <Box className={classes.box}>
-          <Button variant='contained' onClick={connectWallet} disabled={loggedIn}>
-            Connect
-          </Button>
-          <Button variant='outlined' onClick={disconnectWallet} disabled={!loggedIn}>
-            Disconnect
-          </Button>
-          </Box>
+      {/* <div> */}
+        <Grid container spacing={2}>
+          {/* <ul> */}
+            <Grid item xs={12} md={6} align="center">
+              <li className={classes.li}>
+                <button className={classes.button}><img src="https://i.ibb.co/m6mT8pN/3.png" alt="3" border="0" width="240"/></button>
+              </li>
+            </Grid>
+            <Grid item xs={12} md={6} align="center">
+              <li className={classes.li}>
+                <button className={classes.button}><img src="https://i.ibb.co/WcR6BXW/14.png" alt="14" border="0" width="240" align="top"/></button>
+              </li>
+            </Grid>
+            <Grid item xs={12} align="center">
+              <li className={classes.li}>
+                <button className={classes.button}><img src="https://i.ibb.co/5YKhZjk/2.png" alt="2" border="0" width="240"/></button>
+              </li>
+            </Grid>
+          {/* </ul> */}
+          <Grid item xs={12} align="center">
+            <Paper className={classes.paper}>
+              <Typography variant='h3'>
+                Welcome
+              </Typography>
+              {
+                loggedIn &&
+                <>
+                <Avatar />
+                <Typography variant='h5'>
+                  {accInfo.slice(0,10)}...
+                </Typography>
+                </>
+              }
+              <Box className={classes.box}>
+              <Button variant='contained' onClick={connectWallet} disabled={loggedIn}>
+                Connect
+              </Button>
+              <Button variant='outlined' onClick={disconnectWallet} disabled={!loggedIn}>
+                Disconnect
+              </Button>
+              </Box>
 
 
-          <Button variant='contained' color='secondary' onClick={mint} disabled={!loggedIn}>
-            Mint
-          </Button>
-        </Paper>
-      </div>
+              <Button variant='contained' color='secondary' onClick={mint} disabled={!loggedIn}>
+                Mint
+              </Button>
+            </Paper>
+          </Grid>
+        </Grid>
+      {/* </div> */}
     </div>
   );
 }
