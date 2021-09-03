@@ -175,56 +175,52 @@ function App() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      {/* <div> */}
-        <Grid container spacing={2}>
-          {/* <ul> */}
-            <Grid item xs={12} md={6} align="center">
-              <li className={classes.li}>
-                <button className={classes.button}><img src="https://i.ibb.co/m6mT8pN/3.png" alt="3" border="0" width="240"/></button>
-              </li>
-            </Grid>
-            <Grid item xs={12} md={6} align="center">
-              <li className={classes.li}>
-                <button className={classes.button}><img src="https://i.ibb.co/WcR6BXW/14.png" alt="14" border="0" width="240" align="top"/></button>
-              </li>
-            </Grid>
-            <Grid item xs={12} align="center">
-              <li className={classes.li}>
-                <button className={classes.button}><img src="https://i.ibb.co/5YKhZjk/2.png" alt="2" border="0" width="240"/></button>
-              </li>
-            </Grid>
-          {/* </ul> */}
-          <Grid item xs={12} align="center">
-            <Paper className={classes.paper}>
-              <Typography variant='h3'>
-                Welcome
-              </Typography>
-              {
-                loggedIn &&
-                <>
-                <Avatar />
-                <Typography variant='h5'>
-                  {accInfo.slice(0,10)}...
-                </Typography>
-                </>
-              }
-              <Box className={classes.box}>
-              <Button variant='contained' onClick={connectWallet} disabled={loggedIn}>
-                Connect
-              </Button>
-              <Button variant='outlined' onClick={disconnectWallet} disabled={!loggedIn}>
-                Disconnect
-              </Button>
-              </Box>
-
-
-              <Button variant='contained' color='secondary' onClick={mint} disabled={!loggedIn}>
-                Mint
-              </Button>
-            </Paper>
-          </Grid>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={6} align="center">
+          <li className={classes.li}>
+            <button className={classes.button}><img src="https://i.ibb.co/m6mT8pN/3.png" alt="3" border="0" width="240"/></button>
+          </li>
         </Grid>
-      {/* </div> */}
+        <Grid item xs={12} md={6} align="center">
+          <li className={classes.li}>
+            <button className={classes.button}><img src="https://i.ibb.co/WcR6BXW/14.png" alt="14" border="0" width="240" align="top"/></button>
+          </li>
+        </Grid>
+        <Grid item xs={12} align="center">
+          <li className={classes.li}>
+            <button className={classes.button}><img src="https://i.ibb.co/5YKhZjk/2.png" alt="2" border="0" width="240"/></button>
+          </li>
+        </Grid>
+        <Grid item xs={12} align="center">
+          <Paper className={classes.paper}>
+            <Typography variant='h3'>
+              Welcome
+            </Typography>
+            {
+              loggedIn &&
+              <>
+              <Avatar />
+              <Typography variant='h5'>
+                {accInfo.slice(0,10)}...
+              </Typography>
+              </>
+            }
+            <Box className={classes.box}>
+            <Button variant='contained' onClick={connectWallet} disabled={loggedIn}>
+              Connect
+            </Button>
+            <Button variant='outlined' onClick={disconnectWallet} disabled={!loggedIn}>
+              Disconnect
+            </Button>
+            </Box>
+
+
+            <Button variant='contained' color='secondary' onClick={mint} disabled={!loggedIn}>
+              Mint
+            </Button>
+          </Paper>
+        </Grid>
+      </Grid>
     </div>
   );
 }
