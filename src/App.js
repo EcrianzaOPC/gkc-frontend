@@ -16,8 +16,11 @@ import {
   Paper,
   Box,
   Avatar,
-  Grid
+  Grid,
+  IconButton
 } from '@material-ui/core';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 import Web3 from "web3";
 import Web3Modal from "web3modal";
@@ -25,12 +28,15 @@ import Web3Modal from "web3modal";
 import Authereum from "authereum";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
+import backgroundImg from "./assets/img/minthome2.jpg";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     minHeight: '100vh',
     minWidth: '100vw',
-    backgroundImage: `url(https://i.ibb.co/T4rnYqJ/colorful-vector-hand-drawn-doodle-2372240.jpg)`,
+    // backgroundImage: `url(https://i.ibb.co/T4rnYqJ/colorful-vector-hand-drawn-doodle-2372240.jpg)`,
+    background: `url(${backgroundImg})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     display: 'flex',
@@ -89,6 +95,7 @@ function App() {
   const classes = useStyles(theme);
   const [loggedIn, setLoggedIn] = useState(false);
   const [accInfo, setAccInfo] = useState('');
+  const [quantity, setQuantity] = useState(1);
   const providerOptions = {
     metamask: {
       id: 'injected',
@@ -168,7 +175,7 @@ function App() {
 
       const contract = new web3.eth.Contract(abi, address);
       console.log("Contract", contract);
-      await contract.methods.mint(1).send({from: accInfo, value: 0.02 * Math.pow(10,18)});
+      await contract.methods.mint(1, quantity).send({from: accInfo, value: 0.02 * Math.pow(10,18)});
     })
   }
 
@@ -212,6 +219,16 @@ function App() {
             <Button variant='outlined' onClick={disconnectWallet} disabled={!loggedIn}>
               Disconnect
             </Button>
+            </Box>
+
+            <Box>
+              <IconButton variant="contained" color="primary" disabled={!loggedIn} onClick={() => quantity < 50 ? setQuantity(quantity + 1) : 50}>
+                <AddIcon />
+              </IconButton>
+              <Typography> {quantity} </Typography>
+              <IconButton variant="contained" color="primary" disabled={!loggedIn} onClick={() => quantity > 1 ? setQuantity(quantity - 1) : 1}>
+                <RemoveIcon />
+              </IconButton>
             </Box>
 
 
