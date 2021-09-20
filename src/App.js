@@ -175,7 +175,7 @@ function App() {
 
       const contract = new web3.eth.Contract(abi, address);
       console.log("Contract", contract);
-      await contract.methods.mint(1, quantity).send({from: accInfo, value: 0.02 * Math.pow(10,18)});
+      await contract.methods.mint(quantity).send({from: accInfo, value: 0.02 * quantity * Math.pow(10,18)});
     })
   }
 
