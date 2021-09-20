@@ -19,8 +19,7 @@ import {
   Grid,
   IconButton
 } from '@material-ui/core';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+import { Add, Remove } from "@material-ui/icons";
 
 import Web3 from "web3";
 import Web3Modal from "web3modal";
@@ -223,11 +222,11 @@ function App() {
 
             <Box>
               <IconButton variant="contained" color="primary" disabled={!loggedIn} onClick={() => quantity < 50 ? setQuantity(quantity + 1) : 50}>
-                <AddIcon />
+                <Add />
               </IconButton>
               <Typography> {quantity} </Typography>
               <IconButton variant="contained" color="primary" disabled={!loggedIn} onClick={() => quantity > 1 ? setQuantity(quantity - 1) : 1}>
-                <RemoveIcon />
+                <Remove />
               </IconButton>
             </Box>
 
