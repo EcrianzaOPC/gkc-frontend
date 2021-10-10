@@ -18,7 +18,8 @@ import {
   Avatar,
   Grid,
   // IconButton,
-  TextField
+  TextField,
+  Slider
 } from '@material-ui/core';
 // import { Add, Remove } from "@material-ui/icons";
 
@@ -55,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   box: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   ul: {
     padding: 0
@@ -65,15 +66,6 @@ const useStyles = makeStyles((theme) => ({
     listStyleType: 'none',
     alignItems: 'center',
     margin: '0 20px',
-    // &:nth-child(1) button {
-    //   background: #16acea;
-    // }
-    // &:nth-child(2) button {
-    //   background: #d71b3b;
-    // }
-    // &:nth-child(3) button {
-    //   background: #e8d71e;
-    // }
   },
   button: {
     position: 'relative',
@@ -203,7 +195,7 @@ function App() {
         <Grid item xs={12} align="center">
           <Paper className={classes.paper}>
             <Typography variant='h3'>
-              Welcome
+              Gamba Mint
             </Typography>
             {
               loggedIn &&
@@ -223,10 +215,10 @@ function App() {
               </Button>
             </Box>
 
-            <Box className={classes.box}>
-              {/* <IconButton variant="contained" color="primary" disabled={!loggedIn} onClick={() => quantity < 50 ? setQuantity(quantity + 1) : 50}>
+            {/* <Box className={classes.box}>
+              <IconButton variant="contained" color="primary" disabled={!loggedIn} onClick={() => quantity < 50 ? setQuantity(quantity + 1) : 50}>
                 <Add />
-              </IconButton> */}
+              </IconButton>
               <Button variant="outlined" color="primary" onClick={() => setQuantity(5)}>
                 5
               </Button>
@@ -239,10 +231,24 @@ function App() {
               <Button variant="outlined" color="primary" onClick={() => setQuantity(20)}>
                 20
               </Button>
+            </Box> */}
+            <Box sx={{ width: 300 }}>
+              <Slider
+              aria-label="NFTs to Mint"
+              defaultValue={1}
+              getAriaValueText={(value) => parseInt(value)}
+              step={1}
+              marks
+              min={1}
+              max={4}
+              valueLabelDisplay="on"
+              onChange={(e, n) => setQuantity(n)}
+              disabled={!loggedIn}
+              />
             </Box>
-            <Box className={classes.box}>
+            {/* <Box className={classes.box}>
               <TextField fullWidth value={quantity} onChange={(e) => setQuantity(e.target.value)} />
-            </Box>
+            </Box> */}
             <Button variant='contained' color='secondary' onClick={mint} disabled={!loggedIn}>
               Mint
             </Button>
