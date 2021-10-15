@@ -90,6 +90,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [accInfo, setAccInfo] = useState('');
   const [quantity, setQuantity] = useState(1);
+  const [active, setActive] = useState(true);
   const providerOptions = {
     metamask: {
       id: 'injected',
@@ -170,6 +171,9 @@ function App() {
       const contract = new web3.eth.Contract(abi, address);
       console.log("Contract", contract);
       await contract.methods.mint(quantity).send({from: accInfo, value: 0.02 * parseInt(quantity) * Math.pow(10,18)});
+      if (quantity === 20) {
+        setActive(false);
+      }
     })
   }
 
@@ -240,7 +244,7 @@ function App() {
               step={1}
               marks
               min={1}
-              max={4}
+              max={20}
               valueLabelDisplay="on"
               onChange={(e, n) => setQuantity(n)}
               disabled={!loggedIn}
@@ -249,7 +253,7 @@ function App() {
             {/* <Box className={classes.box}>
               <TextField fullWidth value={quantity} onChange={(e) => setQuantity(e.target.value)} />
             </Box> */}
-            <Button variant='contained' color='secondary' onClick={mint} disabled={!loggedIn}>
+            <Button variant='contained' color='secondary' onClick={mint} disabled={!loggedIn && active}>
               Mint
             </Button>
           </Paper>
